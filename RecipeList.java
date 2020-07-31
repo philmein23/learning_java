@@ -18,6 +18,11 @@ public class RecipeList {
                 .collect(Collectors.toList());
     }
 
+    public List<Recipe> findRecipeByCookingTime(int cookingTime) {
+        return this.recipes.stream().filter(recipe -> recipe.getCookingTime() <= cookingTime)
+                .collect(Collectors.toList());
+    }
+
     public void printRecipes() {
         for (Recipe recipe : recipes) {
             System.out.println(recipe);

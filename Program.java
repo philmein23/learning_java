@@ -1,6 +1,5 @@
 
 // import java.util.Scanner;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.nio.file.Paths;
 import java.util.Scanner;

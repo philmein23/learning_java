@@ -3,16 +3,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class RecipeUI {
-    public static void main(String[] args) {
-        System.out.print("Enter recipe file name: ");
-        Scanner scanner = new Scanner(System.in);
+public class RecipeUserInterface {
+    private RecipeList recipes;
 
-        String fileName = scanner.nextLine();
+    public RecipeUserInterface(RecipeList recipes) {
+        this.recipes = recipes;
+    }
+
+    public void readRecipeFile(String file) {
         ArrayList<String> rows = new ArrayList<>();
-        RecipeList recipeList = new RecipeList();
 
-        try (Scanner fileScanner = new Scanner(Paths.get(fileName))) {
+        try (Scanner fileScanner = new Scanner(Paths.get(file))) {
             while (fileScanner.hasNextLine()) {
                 String row = fileScanner.nextLine();
 
@@ -31,19 +32,19 @@ public class RecipeUI {
                         recipe.addIngredient(rows.get(i));
                     }
 
-                    recipeList.addRecipe(recipe);
+                    this.recipes.addRecipe(recipe);
                     rows.clear();
                 }
             }
 
-            List<Recipe> foundRecipes = recipeList.findRecipeByName("balls");
-
-            for (Recipe recipe : foundRecipes) {
-                System.out.println(recipe);
-            }
+            this.recipes.printRecipes();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public void start() {
+
     }
 }
